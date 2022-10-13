@@ -2,44 +2,60 @@ import React from 'react'
 
 const Form = () => {
 
-const formData =  (event) => {
+  const formData = (event) => {
     event.preventDefault()
     const folderName = event.target.folderName.value;
     const totalImage = event.target.totalImage.value;
     const amount = event.target.amount.value;
-    const formDataObject = { folderName, totalImage, amount }
-  
-  
-     fetch('http://localhost:8000/task', {
+    const boolean = event.target.boolean.value;
+    const year = new Date().getFullYear()
+    const month = new Date().getMonth()
+    const date = new Date().getDate()
+    const hour = new Date().getHours()
+    const minutes = new Date().getMinutes()
+    const startTime = `${hour}:${minutes}-${date}/${month}/${year}`
+
+
+    const formDataObject = { folderName, totalImage, amount, boolean, startTime }
+
+
+    fetch('http://localhost:8000/task', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject)
     })
       .then(response => response.json())
-      .then(data =>{
-              console.log(data)
-              alert('New task added')
-              event.target.reset()
+      .then(data => {
+        console.log(data)
+        alert('New task added')
+        event.target.reset()
       }
-  )
-  
-   
+      )
+
+
   }
 
-   
+
   return (
-  
+
     <div className='flex justify-center'>
       <div className='mt-16'>
-        <h1 className='text-2xl font-bold text-center'>Put your data here</h1>
-        <div className='block'>
+        <h1 className='text-2xl font-bold text-center'>Put Your Job Info</h1>
+        <div className='mt-4'>
 
 
           <form onSubmit={formData}>
-            <input className='block border border-black my-2 p-3 rounded-xl' name='folderName' type="text" placeholder='Folder Name' />
-            <input className='block border border-black my-2 p-3 rounded-xl' name='totalImage' type="number" placeholder='Total Image' />
-            <input className='block border border-black my-2 p-3 rounded-xl' name='amount' type="number" placeholder='Amount' />
-            <input className='block border border-black my-2 p-3 rounded-xl w-full hover:bg-gray-700 hover:text-white' type="submit" value="Submit" />
+            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='folderName' type="text" placeholder='Folder Name' />
+            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='totalImage' type="number" placeholder='Total Image' />
+            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='amount' type="number" placeholder='Amount' />
+            <div className='block border border-black my-1 p-2 rounded-lg w-96'>
+            <span className='mr-4'>Google Drive</span>
+            <input  type="radio" value="Yes" name="boolean" /> Yes
+            <input className='ml-3' type="radio" value="No" name="boolean" /> No
+            </div>
+
+
+            <input className='font-bold block border border-black my-1 p-2 rounded-lg w-96 hover:bg-gray-600 hover:text-white' type="submit" value="Submit" />
           </form>
 
 
@@ -55,6 +71,5 @@ export default Form
 
 
 
-  
-  
- 
+
+

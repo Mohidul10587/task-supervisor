@@ -11,7 +11,7 @@ export default function LogIn() {
   if (user) {
     navigate('/')
   }
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
     signInWithEmailAndPassword(data.email, data.password)
 
@@ -21,8 +21,8 @@ export default function LogIn() {
 
 
   return (
-    <div className=' h-[580px] '>
-      <h1 className='text-center text-3xl font-bold my-4'>Log IN</h1>
+    <div className='mt-16'>
+      <h1 className='text-center text-2xl font-bold mb-4'>Log In</h1>
       <div className='flex justify-center'>
 
 
@@ -60,7 +60,7 @@ export default function LogIn() {
             {errors.password?.type === 'required' && <span className='text-red-500'>{errors.password?.message}</span>}
             {errors.password?.type === 'minLength' && <span className='text-red-500'>{errors.password?.message}</span>}
           </label>
-          <div>  <button className=' w-full border border-black block rounded-lg px-4 py-2 mb-3' type='submit'>Log In</button></div>
+          <div>  <button className='block border border-black my-1 p-2 rounded-lg w-96 hover:bg-gray-600 hover:text-white font-bold' type='submit'>Log In</button></div>
         </form>
       </div>
     </div>

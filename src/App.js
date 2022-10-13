@@ -8,13 +8,13 @@ import Home from './components/Home';
 
 function App() {
   return (
-    <RequireAuth> 
+   
       <Routes>
-        <Route path='/' element={<Home></Home> }></Route>
+        <Route path='/' element={<RequireAuth><Home></Home> </RequireAuth>}></Route>
         <Route path='/dataTable' element={<Datatable></Datatable>}></Route>
         <Route path='/login' element={<LogIn></LogIn>}></Route>
       </Routes>
-    </RequireAuth>
+   
   )
 }
 export default App;
