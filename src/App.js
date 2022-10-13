@@ -2,35 +2,19 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom';
 import Datatable from './components/Datatable';
-
-
-
 import LogIn from './components/LogIn';
 import RequireAuth from './components/RequireAuth';
 import Home from './components/Home';
 
-
-
 function App() {
-
-
   return (
-
-    <div>
-
+    <RequireAuth> 
       <Routes>
-        <Route path='/' element={  <Home></Home>}></Route>
+        <Route path='/' element={<Home></Home> }></Route>
         <Route path='/dataTable' element={<Datatable></Datatable>}></Route>
         <Route path='/login' element={<LogIn></LogIn>}></Route>
-
       </Routes>
-
-
-
-
-    </div>
+    </RequireAuth>
   )
-
 }
-
 export default App;
