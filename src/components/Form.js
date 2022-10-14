@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Form = () => {
 
   const formData = (event) => {
@@ -14,9 +15,13 @@ const Form = () => {
     const hour = new Date().getHours()
     const minutes = new Date().getMinutes()
     const startTime = `${hour}:${minutes}-${date}/${month}/${year}`
+    const countDownTime = event.target.time.value;
+    const timeTime = event.target.timeTime.value
+
+    const deadLine = `${countDownTime}T${timeTime}:00+06:00`
 
 
-    const formDataObject = { folderName, totalImage, amount, boolean, startTime }
+    const formDataObject = { folderName, totalImage, amount, boolean, startTime, deadLine }
 
 
     fetch('http://localhost:8000/task', {
@@ -45,17 +50,21 @@ const Form = () => {
 
 
           <form onSubmit={formData}>
-            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='folderName' type="text" placeholder='Folder Name' />
-            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='totalImage' type="number" placeholder='Total Image' />
-            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='amount' type="number" placeholder='Amount' />
+            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='folderName' type="text" placeholder='Folder Name' required />
+            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='totalImage' type="number" placeholder='Total Image' required />
+            <input className='block border border-black my-1 p-2 rounded-lg w-96' name='amount' type="number" placeholder='Amount' required />
             <div className='block border border-black my-1 p-2 rounded-lg w-96'>
-            <span className='mr-4'>Google Drive</span>
-            <input  type="radio" value="Yes" name="boolean" /> Yes
-            <input className='ml-3' type="radio" value="No" name="boolean" /> No
+              <span className='mr-4'>Google Drive</span>
+              <input type="radio" value="Yes" name="boolean" /> Yes
+              <input className='ml-3' type="radio" value="No" name="boolean" /> No
             </div>
-
-
+            <div className='flex justify-between border border-black my-1 p-2 rounded-lg w-96'>
+              <span>DeadLine</span>
+              <input name='time' type="date" placeholder='Amount'  required />
+              <input name='timeTime' type="time" placeholder='Amount' required />
+            </div>
             <input className='font-bold block border border-black my-1 p-2 rounded-lg w-96 hover:bg-gray-600 hover:text-white' type="submit" value="Submit" />
+
           </form>
 
 
@@ -63,6 +72,7 @@ const Form = () => {
         </div>
 
       </div>
+
     </div>
   );
 }
