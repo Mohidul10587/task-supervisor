@@ -8,16 +8,16 @@ import Home from './components/Home';
 
 function App() {
   return (
-   <div>
-    
-    <Routes>
+    <div>
+
+      <Routes>
         <Route path='/' element={<RequireAuth><Home></Home></RequireAuth>}></Route>
-        <Route path='/dataTable' element={  <Datatable></Datatable>}></Route>
+        <Route path='/datatable' element={<RequireAuth><Datatable></Datatable></RequireAuth>}></Route>
         <Route path='/login' element={<LogIn></LogIn>}></Route>
       </Routes>
-   </div>
-      
-   
+    </div>
+
+
   )
 }
 
