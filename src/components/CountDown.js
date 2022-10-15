@@ -28,7 +28,7 @@ function CounterDown({ inputTime }) {
   return (
     <div className="text-center">
       {timeLeft.day|| timeLeft.hours || timeLeft.minutes || timeLeft.seconds ? (
-        <p>
+        <div>
           <span>{timeLeft.day}d</span>
           <span>:</span>
           <span>{timeLeft.hours}h</span>
@@ -36,7 +36,7 @@ function CounterDown({ inputTime }) {
           <span>{timeLeft.minutes}m</span>
           <span>:</span>
           <span>{timeLeft.seconds}s</span>
-        </p>
+        </div>
       ) : (
         <p>Time is up 🔥</p>
       )}

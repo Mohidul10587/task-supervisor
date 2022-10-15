@@ -3,22 +3,35 @@ import { auth } from '../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import Loading from './shared/Loading';
 export default function LogIn() {
-  const [
-    signInWithEmailAndPassword,
-    user,] = useSignInWithEmailAndPassword(auth);
+
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [signInWithEmailAndPassword, user, loading,error] = useSignInWithEmailAndPassword(auth);
+
   const navigate = useNavigate()
+
+  let firebaseError;
+
+  if(loading) {
+     return <p className='text-center'><Loading></Loading></p>
+
+  } 
+
+  if (error) {
+    firebaseError = <small className='text-red-600'>{error.message}</small>
+  }
+
   if (user) {
     navigate('/')
+
   }
-  const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
+
     signInWithEmailAndPassword(data.email, data.password)
 
-  };
-
-
-
+  }
 
   return (
     <div className='mt-16'>
@@ -60,6 +73,7 @@ export default function LogIn() {
             {errors.password?.type === 'required' && <span className='text-red-500'>{errors.password?.message}</span>}
             {errors.password?.type === 'minLength' && <span className='text-red-500'>{errors.password?.message}</span>}
           </label>
+          {firebaseError}
           <div>  <button className='block border border-black my-1 p-2 rounded-lg w-96 hover:bg-gray-600 hover:text-white font-bold' type='submit'>Log In</button></div>
         </form>
       </div>
