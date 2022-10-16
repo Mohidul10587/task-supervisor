@@ -9,7 +9,7 @@ const Datatable = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:8000/task')
+        fetch('https://secure-harbor-61507.herokuapp.com/task')
             .then(res => res.json())
             .then(data => setTasks(data))
 
